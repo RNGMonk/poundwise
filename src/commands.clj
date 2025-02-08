@@ -1,14 +1,12 @@
 (ns commands
-  (:require [heretic.core :as heretic]))
-
-(defmulti command :action)
+  (:require [heretic.core :refer [command redirect]]))
 
 (defmethod command :login
   [{:keys [email password]}]
   (if (and (= email "hi@mikejackson.co.uk")
            (= password "password"))
-    (heretic/redirect "/dashboard")
-    (heretic/redirect "/")))
+    (redirect "/dashboard")
+    (redirect "/")))
 
 (defmethod command :default
   [params]

@@ -1,8 +1,7 @@
 (ns queries
-  (:require [db]
+  (:require [heretic.core :refer [query]]
+            [db]
             [components :refer [dashboard-nav]]))
-
-(defmulti query :action)
 
 (defmethod query :show-home 
   [params] 

@@ -6,6 +6,9 @@
    [jsonista.core :as json]
    [std.html :as html]))
 
+(defmulti command :action)
+(defmulti query :action)
+
 (defn- response [status body]
   {:status status
    :body body})
@@ -116,7 +119,7 @@
   (fn [req]
     (render (handler req))))
 
-(defn make-app [{:keys [query command routes dependencies]}]
+(defn make-app [{:keys [routes dependencies]}]
   (-> (make-handler query command)
       (wrap-render)
       (wrap-query-remapper routes)

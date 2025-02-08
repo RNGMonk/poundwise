@@ -1,8 +1,8 @@
 (ns server
   (:require [ring.adapter.jetty :as jetty]
-            [queries :refer [query]]
-            [commands :refer [command]]
             [heretic.core :as heretic]
+            [queries]
+            [commands]
             [db]))
 
 (defonce server (atom nil))
@@ -17,9 +17,7 @@
 
 (def app 
   (heretic/make-app
-   {:query query
-    :command command
-    :routes routes
+   {:routes routes
     :dependencies {:conn db/conn}}))
 
 (defn start-server []
